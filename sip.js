@@ -541,6 +541,7 @@ function makeTcpTransport(options, callback) {
     function(port, host, callback) { return net.connect(port, host, callback); },
     function(callback) { 
       var server = net.createServer(callback);
+      server.on('error', function(e) { console.log(''+e); throw e; });
       server.listen(options.port || 5060, options.address);
       return server;
     },
